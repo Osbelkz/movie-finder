@@ -1,9 +1,11 @@
 import {combineReducers, createStore, Store} from "redux";
 import {reducer} from "./reducer";
+import {searchReducer} from "./searchReducer";
 
 
 const reducers = combineReducers({
-    movie: reducer
+    movie: reducer,
+    search: searchReducer
 })
 
 
