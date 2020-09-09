@@ -1,17 +1,18 @@
 enum ACTION_TYPES {
     SET_MOVIE = "SET_MOVIE",
-    SET_LOADING = "SET_LOADING"
+    SET_LOADING = "SET_LOADING",
+    SET_MOVIE_ID = "SET_MOVIE_ID",
 }
 
 export interface StateType {
     movieId: string
-    movie: null | any
+    movie: typeof test
     isLoading: boolean
 }
 
 interface SetMovieActionType {
     type: ACTION_TYPES.SET_MOVIE
-    payload: any
+    payload: typeof test
 }
 
 interface SetLoadingModeActionType {
@@ -19,7 +20,12 @@ interface SetLoadingModeActionType {
     payload: { isLoading: boolean }
 }
 
-type ActionTypes = SetMovieActionType | SetLoadingModeActionType
+interface SetMovieIdActionType {
+    type: ACTION_TYPES.SET_MOVIE_ID
+    payload: {movieId:string}
+}
+
+type ActionTypes = SetMovieActionType | SetLoadingModeActionType | SetMovieIdActionType
 
 const test = {
     adult: false,
@@ -95,6 +101,13 @@ export const reducer = (state = initialState, action: ActionTypes): StateType =>
                 isLoading: action.payload.isLoading
             }
         }
+        case ACTION_TYPES.SET_MOVIE_ID: {
+            return {
+                ...state,
+                movieId: action.payload.movieId
+            }
+
+        }
         default:
             return state
     }
@@ -107,5 +120,8 @@ export const setMovieData = (movie: any): SetMovieActionType => {
 }
 export const setLoadingMode = (isLoading: boolean): SetLoadingModeActionType => {
     return {type: ACTION_TYPES.SET_LOADING, payload: {isLoading}}
+}
+export const setMovieId = (movieId: string): SetMovieIdActionType => {
+    return {type: ACTION_TYPES.SET_MOVIE_ID, payload: {movieId}}
 }
 
