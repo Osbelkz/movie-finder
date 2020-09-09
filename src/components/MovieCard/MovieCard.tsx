@@ -6,7 +6,7 @@ type PropsType = {
     movie: any
 }
 
-const MovieCard = (props: PropsType) => {
+const MovieCard = React.memo((props: PropsType) => {
     return (
         <div className={classes.movieCard}>
             <div className={classes.movieCard__row}>
@@ -26,6 +26,6 @@ const MovieCard = (props: PropsType) => {
             </div>
         </div>
     );
-};
+});
 
 export default MovieCard;

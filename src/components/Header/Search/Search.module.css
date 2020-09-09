@@ -1,14 +1,11 @@
-.header {
-    position: fixed;
-    height: 30px;
-    padding: 20px;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: cadetblue;
-    opacity: 0.9;
+
+.search {
+    position: relative;
+    width: 400px;
 }
-.header > img {
-    display: block;
-    height: 100%;
+
+.dropResults {
+    background-color: #000000;
+    position: absolute;
+    z-index: 101;
 }
