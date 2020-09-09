@@ -5,7 +5,7 @@ enum ACTION_TYPES {
 }
 
 export interface StateType {
-    movieId: string
+    movieId: string | number
     movie: typeof test
     isLoading: boolean
 }
@@ -22,7 +22,7 @@ interface SetLoadingModeActionType {
 
 interface SetMovieIdActionType {
     type: ACTION_TYPES.SET_MOVIE_ID
-    payload: {movieId:string}
+    payload: {movieId:string | number}
 }
 
 type ActionTypes = SetMovieActionType | SetLoadingModeActionType | SetMovieIdActionType
@@ -121,7 +121,7 @@ export const setMovieData = (movie: any): SetMovieActionType => {
 export const setLoadingMode = (isLoading: boolean): SetLoadingModeActionType => {
     return {type: ACTION_TYPES.SET_LOADING, payload: {isLoading}}
 }
-export const setMovieId = (movieId: string): SetMovieIdActionType => {
+export const setMovieId = (movieId: string | number): SetMovieIdActionType => {
     return {type: ACTION_TYPES.SET_MOVIE_ID, payload: {movieId}}
 }
 
