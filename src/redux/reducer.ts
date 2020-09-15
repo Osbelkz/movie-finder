@@ -1,3 +1,6 @@
+import {movieAPI} from "../api/api";
+import { DispatchType } from "./types";
+
 enum ACTION_TYPES {
     SET_MOVIE = "SET_MOVIE",
     SET_LOADING = "SET_LOADING",
@@ -25,7 +28,7 @@ interface SetMovieIdActionType {
     payload: {movieId:string | number}
 }
 
-type ActionTypes = SetMovieActionType | SetLoadingModeActionType | SetMovieIdActionType
+export type MovieActionTypes = SetMovieActionType | SetLoadingModeActionType | SetMovieIdActionType
 
 const test = {
     adult: false,
@@ -85,7 +88,7 @@ const initialState: StateType = {
 }
 
 
-export const reducer = (state = initialState, action: ActionTypes): StateType => {
+export const reducer = (state = initialState, action: MovieActionTypes): StateType => {
     switch (action.type) {
         case ACTION_TYPES.SET_MOVIE: {
             console.log(state)
@@ -106,7 +109,6 @@ export const reducer = (state = initialState, action: ActionTypes): StateType =>
                 ...state,
                 movieId: action.payload.movieId
             }
-
         }
         default:
             return state
@@ -125,3 +127,12 @@ export const setMovieId = (movieId: string | number): SetMovieIdActionType => {
     return {type: ACTION_TYPES.SET_MOVIE_ID, payload: {movieId}}
 }
 
+// THUNKS
+export const getMovieData = (movieId: string | number) => (dispatch: DispatchType) => {
+    dispatch(setLoadingMode(true))
+    movieAPI.getMovie(movieId)
+        .then(res => {
+            dispatch(setMovieData(res.data))
+            dispatch(setLoadingMode(false))
+        }).catch(error => console.log(error))
+}

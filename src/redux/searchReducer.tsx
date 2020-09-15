@@ -1,3 +1,6 @@
+import {DispatchType} from "./types";
+import {searchAPI} from "../api/api";
+
 enum SEARCH_ACTION_TYPES {
     SET_SEARCH_WORD = "SET_SEARCH_WORD",
     SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS",
@@ -49,7 +52,7 @@ interface ShowResultsActionType {
     payload: { showResults: boolean }
 }
 
-type ActionType = SetSearchWordActionType
+export type SearchActionTypes = SetSearchWordActionType
     | SetSearchResultsActionType
     | ShowResultsActionType
 
@@ -59,7 +62,7 @@ const initialState: StateType = {
     showResults: false,
 }
 
-export const searchReducer = (state = initialState, action: ActionType): StateType => {
+export const searchReducer = (state = initialState, action: SearchActionTypes): StateType => {
     switch (action.type) {
         case SEARCH_ACTION_TYPES.SET_SEARCH_WORD: {
             return {
@@ -93,4 +96,18 @@ export const setSearchResults = (searchResults: SearchResultsType): SetSearchRes
 }
 export const showResults = (showResults: boolean): ShowResultsActionType => {
     return {type: SEARCH_ACTION_TYPES.SHOW_RESULTS, payload: {showResults}}
+}
+
+// THUNKS
+
+export const getSearchResults = (searchWord: string) => (dispatch: DispatchType) => {
+    if (searchWord.length >= 3) {
+        dispatch(showResults(true))
+        searchAPI.getSearchResults(searchWord)
+            .then(res => {
+                dispatch(setSearchResults(res.data))
+            }).catch(error => console.log(error))
+    } else {
+        dispatch(showResults(false))
+    }
 }

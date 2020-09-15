@@ -1,6 +1,7 @@
-import {combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {reducer} from "./reducer";
 import {searchReducer} from "./searchReducer";
+import thunkMiddleware from "redux-thunk"
 
 
 const reducers = combineReducers({
@@ -11,7 +12,7 @@ const reducers = combineReducers({
 
 export type StoreType = ReturnType<typeof reducers>
 
-let store: Store<StoreType> = createStore(reducers);
+let store: Store<StoreType> = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 
 export default store;
