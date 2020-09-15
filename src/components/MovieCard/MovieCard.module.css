@@ -1,12 +1,12 @@
 .movieCard {
     color: white;
-    background: #000;
-    opacity: 0.8;
+    background: rgba(0,0,0,.7);
     width: 1200px;
     height: 500px;
     box-sizing: border-box;
     border-radius: 30px;
     overflow: hidden;
+    margin: 20px;
 }
 .movieCard__row{
     display: flex;

@@ -1,17 +1,13 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import classes from "./Search.module.css";
 import {useDispatch, useSelector} from "react-redux";
-import {setSearchResults, setSearchWord, StateType} from "../../../redux/searchReducer";
+import {getSearchResults, setSearchWord, showResults, StateType} from "../../../redux/searchReducer";
 import {StoreType} from "../../../redux/store";
 import SearchItem from "./SearchItem/SearchItem";
-import axios from "axios"
-import {API_KEY, API_URL} from "../../../api/api";
 import {setMovieId} from "../../../redux/reducer";
 
 
 const Search = () => {
-
-    let [showResults, setShowResults] = useState<boolean>(false)
 
     const search = useSelector<StoreType, StateType>(state => state.search)
     const movieIdData = useSelector<StoreType>(state => state.movie.movieId)
@@ -22,36 +18,26 @@ const Search = () => {
     }
 
     const onChangeCurrentMovie = (movieId: number) => {
-        if (!(movieIdData == movieId)) {
+        if (!(movieIdData === movieId)) {
             dispatch(setMovieId(movieId))
-            setShowResults(false)
+            dispatch(showResults(false))
         }
     }
 
     useEffect(() => {
-        if (search.searchWord.length >= 3) {
-            // dispatch(showResults(true))
-            setShowResults(true)
-            axios.get(`/search/movie?api_key=${API_KEY}&language=en-EN&query=${search.searchWord}&page=1`, {
-                baseURL: API_URL
-            })
-                .then(res => {
-                    dispatch(setSearchResults(res.data))
-                }).catch(error => console.log(error))
-        } else {
-            setShowResults(false)
-        }
+        dispatch(getSearchResults(search.searchWord))
     }, [search.searchWord])
 
     return (
         <div className={classes.search}>
             <input type="text"
-                   onFocus={() => setShowResults(true)}
+                   className={classes.searchInput}
+                   onFocus={() => dispatch(showResults(true))}
                    value={search.searchWord}
                    onChange={onChangeHandler}/>
-            {showResults
+            {search.showResults
                 ? <div className={classes.dropResults}>
-                    {search.searchResults?.results.slice(0, 8).map(movie =>
+                    {search.searchResults?.results.sort((a,b)=>b.popularity-a.popularity).slice(0, 8).map(movie =>
                         <SearchItem
                             changeCurrentMovie={onChangeCurrentMovie}
                             original_title={movie.original_title}
