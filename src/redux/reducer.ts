@@ -1,5 +1,5 @@
+import { Dispatch } from "redux";
 import {movieAPI} from "../api/api";
-import { DispatchType } from "./types";
 
 enum ACTION_TYPES {
     SET_MOVIE = "SET_MOVIE",
@@ -62,23 +62,31 @@ const test = {
     vote_count: 23594,
 }
 const empty = {
-        backdrop_path: "",
-        poster_path: "",
-        budget: 0,
-        genres: [],
-        homepage: "",
-        id: 0,
-        imdb_id: "",
-        original_title: "",
-        overview: "",
-        popularity: 0,
-        release_date: "",
-        revenue: 0,
-        status: "",
-        tagline: "",
-        title: "",
-        vote_average: 0,
-        vote_count: 0,
+    adult: "",
+    backdrop_path: "",
+    belongs_to_collection:"",
+    budget: "",
+    genres: "",
+    homepage: "",
+    id: "",
+    imdb_id: "",
+    original_language: "",
+    original_title: "",
+    overview: "",
+    popularity: "",
+    poster_path: "",
+    production_companies: "",
+    production_countries:"",
+    release_date: "",
+    revenue: "",
+    runtime: "",
+    spoken_languages: "",
+    status: "",
+    tagline: "",
+    title: "",
+    video: "",
+    vote_average: "",
+    vote_count: "",
     }
 
 const initialState: StateType = {
@@ -128,7 +136,7 @@ export const setMovieId = (movieId: string | number): SetMovieIdActionType => {
 }
 
 // THUNKS
-export const getMovieData = (movieId: string | number) => (dispatch: DispatchType) => {
+export const getMovieData = (movieId: string | number) => (dispatch: Dispatch) => {
     dispatch(setLoadingMode(true))
     movieAPI.getMovie(movieId)
         .then(res => {

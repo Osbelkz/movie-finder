@@ -1,4 +1,4 @@
-import {DispatchType} from "./types";
+import { Dispatch } from "redux";
 import {searchAPI} from "../api/api";
 
 enum SEARCH_ACTION_TYPES {
@@ -24,7 +24,7 @@ interface SearchResultType {
     vote_average: number
 }
 
-interface SearchResultsType {
+interface AllSearchResultsType {
     page: number
     total_results: number
     total_pages: number
@@ -33,7 +33,7 @@ interface SearchResultsType {
 
 export interface StateType {
     searchWord: string
-    searchResults: SearchResultsType | null
+    searchResults: AllSearchResultsType | null
     showResults: boolean
 }
 
@@ -44,7 +44,7 @@ interface SetSearchWordActionType {
 
 interface SetSearchResultsActionType {
     type: SEARCH_ACTION_TYPES.SET_SEARCH_RESULTS
-    payload: { searchResults: SearchResultsType }
+    payload: { searchResults: AllSearchResultsType }
 }
 
 interface ShowResultsActionType {
@@ -91,7 +91,7 @@ export const searchReducer = (state = initialState, action: SearchActionTypes): 
 export const setSearchWord = (searchWord: string): SetSearchWordActionType => {
     return {type: SEARCH_ACTION_TYPES.SET_SEARCH_WORD, payload: {searchWord}}
 }
-export const setSearchResults = (searchResults: SearchResultsType): SetSearchResultsActionType => {
+export const setSearchResults = (searchResults: AllSearchResultsType): SetSearchResultsActionType => {
     return {type: SEARCH_ACTION_TYPES.SET_SEARCH_RESULTS, payload: {searchResults}}
 }
 export const showResults = (showResults: boolean): ShowResultsActionType => {
@@ -99,8 +99,7 @@ export const showResults = (showResults: boolean): ShowResultsActionType => {
 }
 
 // THUNKS
-
-export const getSearchResults = (searchWord: string) => (dispatch: DispatchType) => {
+export const getSearchResults = (searchWord: string) => (dispatch: Dispatch) => {
     if (searchWord.length >= 3) {
         dispatch(showResults(true))
         searchAPI.getSearchResults(searchWord)

@@ -18,7 +18,7 @@ const Search = () => {
     }
 
     const onChangeCurrentMovie = (movieId: number) => {
-        if (!(movieIdData === movieId)) {
+        if (movieIdData !== movieId) {
             dispatch(setMovieId(movieId))
             dispatch(showResults(false))
         }
@@ -34,9 +34,10 @@ const Search = () => {
                    className={classes.searchInput}
                    onFocus={() => dispatch(showResults(true))}
                    value={search.searchWord}
-                   onChange={onChangeHandler}/>
+                   onChange={onChangeHandler}
+            />
             {search.showResults
-                ? <div className={classes.dropResults}>
+                ? <div className={classes.dropResults} >
                     {search.searchResults?.results.sort((a,b)=>b.popularity-a.popularity).slice(0, 8).map(movie =>
                         <SearchItem
                             changeCurrentMovie={onChangeCurrentMovie}

@@ -15,13 +15,37 @@ const MovieCard = React.memo((props: PropsType) => {
                 </div>
                 <div className={classes.movieCard__info}>
                     <h2>{props.movie.original_title}</h2>
-                    <p>Release date: {props.movie.release_date}</p>
-                    <p>Genres: {props.movie.genres.map((genre: any)=>genre.name).join(", ")}</p>
-                    <p>Tagline: {props.movie.tagline}</p>
-                    <p>Budget: ${props.movie.budget} </p>
-                    <p>Revenue: ${props.movie.revenue}</p>
-                    <p>Overview: {props.movie.overview} </p>
-                    <p>Vote average: {props.movie.vote_average} ({props.movie.vote_count})</p>
+                    <h3>{props.movie.title}</h3>
+                    <table>
+                        <tr>
+                            <th className={classes.tableHeader}>Release date:</th>
+                            <td>{props.movie.release_date}</td>
+                        </tr>
+                        <tr>
+                            <th>Genres:</th>
+                            <td>{props.movie.genres.map((genre: any)=>genre.name).join(", ")}</td>
+                        </tr>
+                        <tr>
+                            <th>Tagline:</th>
+                            <td>{props.movie.tagline}</td>
+                        </tr>
+                        <tr>
+                            <th>Budget:</th>
+                            <td>{props.movie.budget}</td>
+                        </tr>
+                        <tr>
+                            <th>Revenue:</th>
+                            <td>{props.movie.revenue}</td>
+                        </tr>
+                        <tr>
+                            <th>Overview:</th>
+                            <td>{props.movie.overview}</td>
+                        </tr>
+                        <tr>
+                            <th>Vote average:</th>
+                            <td>{props.movie.vote_average} ({props.movie.vote_count})</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ let instance = axios.create({
     baseURL: API_URL,
     params: {
         api_key: API_KEY,
-        language: "ru-RU"
+        language: "en-EN"
     }
 })
 
