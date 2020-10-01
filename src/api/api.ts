@@ -20,7 +20,7 @@ let instance = axios.create({
 })
 
 export const movieAPI = {
-    getMovie(movieId: string | number) {
+    getMovie(movieId: string | number | null) {
         return instance.get(`movie/${movieId}`)
     }
 }
@@ -40,9 +40,9 @@ export const searchAPI = {
 
 //additional functions
 
-export const getBackdropImg = (backdrop: string): string => {
+export const getBackdropImg = (backdrop: string | null): string => {
     return `${IMAGE_DOMAIN_URL}original/${backdrop}`
 }
-export const getPosterImg = (poster: string): string => {
+export const getPosterImg = (poster: string | null): string => {
     return `${IMAGE_DOMAIN_URL}w342/${poster}`
 }

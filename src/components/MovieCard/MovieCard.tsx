@@ -1,49 +1,56 @@
 import React from 'react';
 import classes from './MovieCard.module.css'
 import {getPosterImg} from "../../api/api";
+import {MovieDataType} from "../../types/types";
+import {Preloader} from "../UI/Preloader/Preloader";
 
 type PropsType = {
-    movie: any
+    movieData: MovieDataType | null
 }
 
-const MovieCard = React.memo((props: PropsType) => {
+const MovieCard = React.memo(({movieData}: PropsType) => {
+
+    if (!movieData) {
+        return <Preloader/>
+    }
+
     return (
         <div className={classes.movieCard}>
             <div className={classes.movieCard__row}>
                 <div className={classes.movieCard__poster}>
-                    <img src={getPosterImg(props.movie.poster_path)} alt=""/>
+                    <img src={getPosterImg(movieData.poster_path)} alt=""/>
                 </div>
                 <div className={classes.movieCard__info}>
-                    <h2>{props.movie.original_title}</h2>
-                    <h3>{props.movie.title}</h3>
+                    <h2>{movieData.original_title}</h2>
+                    <h3>{movieData.title}</h3>
                     <table>
                         <tr>
                             <th className={classes.tableHeader}>Release date:</th>
-                            <td>{props.movie.release_date}</td>
+                            <td>{movieData.release_date}</td>
                         </tr>
                         <tr>
                             <th>Genres:</th>
-                            <td>{props.movie.genres.map((genre: any)=>genre.name).join(", ")}</td>
+                            <td>{movieData.genres.map((genre: any)=>genre.name).join(", ")}</td>
                         </tr>
                         <tr>
                             <th>Tagline:</th>
-                            <td>{props.movie.tagline}</td>
+                            <td>{movieData.tagline}</td>
                         </tr>
                         <tr>
                             <th>Budget:</th>
-                            <td>{props.movie.budget}</td>
+                            <td>{movieData.budget}</td>
                         </tr>
                         <tr>
                             <th>Revenue:</th>
-                            <td>{props.movie.revenue}</td>
+                            <td>{movieData.revenue}</td>
                         </tr>
                         <tr>
                             <th>Overview:</th>
-                            <td>{props.movie.overview}</td>
+                            <td>{movieData.overview}</td>
                         </tr>
                         <tr>
                             <th>Vote average:</th>
-                            <td>{props.movie.vote_average} ({props.movie.vote_count})</td>
+                            <td>{movieData.vote_average} ({movieData.vote_count})</td>
                         </tr>
                     </table>
                 </div>

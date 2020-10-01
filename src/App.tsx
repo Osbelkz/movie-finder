@@ -2,21 +2,25 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {getBackdropImg} from "./api/api";
 import {useDispatch, useSelector} from "react-redux";
-import {getMovieData, StateType} from "./redux/reducer";
-import {StoreType} from "./redux/store";
+import {RootStateType} from "./redux/store";
 import Header from "./components/Header/Header";
 import MovieCard from "./components/MovieCard/MovieCard";
 import {Preloader} from "./components/UI/Preloader/Preloader";
+import {MoviesStateType} from "./redux/moviesReducer";
+import {getMovieDataTC} from "./redux/movies-actions";
 function App() {
 
     let dispatch = useDispatch()
-    let movie = useSelector<StoreType, StateType>(state => state.movie)
+    let movie = useSelector<RootStateType, MoviesStateType>(state => state.movie)
 
     useEffect(() => {
-        dispatch(getMovieData(movie.movieId))
+        dispatch(getMovieDataTC(movie.movieId))
     }, [movie.movieId]);
 
-    let backdrop = getBackdropImg(movie.movie.backdrop_path)
+    let backdrop = "";
+    if (movie.movieData) {
+        backdrop = getBackdropImg(movie.movieData.backdrop_path)
+    }
 
     return (
         <div className="App">
@@ -28,7 +32,7 @@ function App() {
                     <div>
 
                     </div>
-                    <MovieCard movie={movie.movie}/>
+                    <MovieCard movieData={movie.movieData}/>
                 </>
             }
         </div>
