@@ -1,10 +1,24 @@
 .searchItem {
-    display: flex;
-    justify-content: space-between;
     padding: 5px;
     color: white;
+    position: relative;
 }
+.description {
+    display: flex;
+    justify-content: space-between;
+}
+
 .searchItem:hover {
-    color: white;
     text-decoration: underline;
+    color: white;
+    cursor: pointer;
+}
+
+.quickView {
+    position: absolute;
+    bottom: -60px;
+    right: -92px;
+    width: 92px;
+    height: 138px;
+    background-color:cadetblue;
 }

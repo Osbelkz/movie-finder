@@ -1,4 +1,5 @@
 import axios from "axios"
+import {AppLanguageType} from "../redux/app-reducer";
 
 // API DOMAIN
 export const API_URL = "https://api.themoviedb.org/3"
@@ -15,22 +16,27 @@ let instance = axios.create({
     baseURL: API_URL,
     params: {
         api_key: API_KEY,
-        language: "en-EN"
     }
 })
 
 export const movieAPI = {
-    getMovie(movieId: string | number | null) {
-        return instance.get(`movie/${movieId}`)
+    getMovie(movieId: string | number | null, lang: AppLanguageType) {
+        return instance.get(`movie/${movieId}`, {
+            params: {
+                language: lang
+            }
+        })
     }
 }
 
 export const searchAPI = {
-    getSearchResults(searchWord: string){
+    getSearchResults(searchWord: string, lang: AppLanguageType){
         return instance.get(`/search/movie`, {
             params: {
+                language: lang,
                 query: searchWord,
-                page: "1"
+                page: "1",
+
             }
         })
     }
@@ -41,8 +47,11 @@ export const searchAPI = {
 //additional functions
 
 export const getBackdropImg = (backdrop: string | null): string => {
-    return `${IMAGE_DOMAIN_URL}original/${backdrop}`
+    return `${IMAGE_DOMAIN_URL}w780/${backdrop}`
 }
 export const getPosterImg = (poster: string | null): string => {
     return `${IMAGE_DOMAIN_URL}w342/${poster}`
+}
+export const getMiniPosterImg = (poster: string | null): string => {
+    return `${IMAGE_DOMAIN_URL}w92/${poster}`
 }

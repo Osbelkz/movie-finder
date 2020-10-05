@@ -6,7 +6,7 @@ type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' |
 
 
 
-export type MovieDataType = {
+export type MovieFullDataType = {
     adult: boolean,
     backdrop_path: string | null,
     belongs_to_collection: null | Object,

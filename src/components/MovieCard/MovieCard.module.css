@@ -1,21 +1,24 @@
 .movieCard {
-    color: white;
-    background: rgba(0,0,0,.7);
+    overflow: hidden;
+    box-sizing: border-box;
     width: 1200px;
     height: 500px;
-    box-sizing: border-box;
-    border-radius: 30px;
-    overflow: hidden;
     margin: 20px;
+    color: white;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, .7);
 }
-.movieCard__row{
+
+.movieCard__row {
     display: flex;
     flex-direction: row;
 }
+
 .movieCard__poster {
     overflow: hidden;
     flex: 0 0 auto;
 }
+
 .movieCard__poster > img {
     display: block;
     overflow: hidden;
@@ -26,11 +29,12 @@
     text-indent: 100%;
     border-radius: 3px;
 }
+
 .movieCard__info {
     padding: 20px;
 }
 
 table > tr > th {
-    text-align: right;
     width: 100px;
+    text-align: right;
 }
