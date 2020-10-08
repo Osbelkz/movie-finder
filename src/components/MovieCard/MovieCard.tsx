@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './MovieCard.module.css'
+import classes from './MovieCard.module.scss'
 import {getPosterImg} from "../../api/api";
 import {MovieFullDataType} from "../../types/types";
 import {Preloader} from "../UI/Preloader/Preloader";
@@ -51,13 +51,14 @@ const MovieCard = React.memo(({movieData, language}: PropsType) => {
                     {/*<h2>{movieData.original_title}</h2>*/}
                     <h3>{movieData.title}</h3>
                     <table>
+                        <tbody>
                         <tr>
                             <th className={classes.tableHeader}>{localization.release_date}</th>
                             <td>{movieData.release_date}</td>
                         </tr>
                         <tr>
                             <th>{localization.genres}</th>
-                            <td>{movieData.genres.map((genre: any) => genre.name).join(", ")}</td>
+                            <td>{movieData.genres.map((genre) => genre.name).join(", ")}</td>
                         </tr>
                         <tr>
                             <th>{localization.tagline}</th>
@@ -79,6 +80,7 @@ const MovieCard = React.memo(({movieData, language}: PropsType) => {
                             <th>{localization.vote_average}</th>
                             <td>{movieData.vote_average} ({movieData.vote_count})</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

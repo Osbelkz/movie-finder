@@ -1,0 +1,44 @@
+.movieCard {
+    overflow: hidden;
+    box-sizing: border-box;
+    max-width: 1200px;
+    color: white;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, .9);
+    margin: 20px;
+    .movieCard__row {
+        display: flex;
+        flex-direction: row;
+        @media screen and (max-width: 900px){
+            flex-direction: column;
+            align-items: center;
+        }
+        .movieCard__poster {
+            overflow: hidden;
+            flex: 0 0 auto;
+            border-radius: 10px;
+            > img {
+                display: block;
+                width: 320px;
+                @media screen and (max-width: 900px){
+
+                }
+            }
+        }
+        .movieCard__info {
+            padding: 20px;
+            table > tr > th {
+                width: 100px;
+                text-align: right;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
