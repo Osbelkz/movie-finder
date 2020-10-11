@@ -76,12 +76,11 @@ const MovieCard = React.memo(({movieData, language}: PropsType) => {
                             <th>{localization.overview}</th>
                             <td>{movieData.overview}</td>
                         </tr>
-                        <tr>
-                            <th>{localization.vote_average}</th>
-                            <td>{movieData.vote_average} ({movieData.vote_count})</td>
-                        </tr>
                         </tbody>
                     </table>
+                </div>
+                <div className={classes.movieCard__averageRate} style={{backgroundColor: `hsl(${movieData.vote_average*10}, 100%, 50%)`}}>
+                    {movieData.vote_average}
                 </div>
             </div>
         </div>
