@@ -1,50 +1,86 @@
 import React from 'react';
-import classes from './MovieCard.module.css'
+import classes from './MovieCard.module.scss'
 import {getPosterImg} from "../../api/api";
+import {MovieFullDataType} from "../../types/types";
+import {Preloader} from "../UI/Preloader/Preloader";
+import {AppLanguageType} from "../../redux/app-reducer";
+import noPoster from "../../assets/no-poster-available.jpg"
 
 type PropsType = {
-    movie: any
+    movieData: MovieFullDataType | null
+    language: AppLanguageType
 }
 
-const MovieCard = React.memo((props: PropsType) => {
+const MovieCard = React.memo(({movieData, language}: PropsType) => {
+
+    const enLang = {
+        release_date: "Release date:",
+        genres: "Genres:",
+        tagline: "Tagline:",
+        budget: "Budget:",
+        revenue: "Revenue:",
+        overview: "Overview:",
+        vote_average: "Vote average:"
+    }
+
+    const ruLang = {
+        release_date: "Дата релиза:",
+        genres: "Жанры:",
+        tagline: "Девиз:",
+        budget: "Бюджет:",
+        revenue: "Сборы:",
+        overview: "Описание:",
+        vote_average: "Средняя оценка:"
+    }
+
+    let localization = language === "en-EN" ? enLang : ruLang
+
+    if (!movieData) {
+        return <Preloader/>
+    }
+
+    let posterPath = movieData.poster_path ? getPosterImg(movieData.poster_path) : noPoster
+
     return (
         <div className={classes.movieCard}>
             <div className={classes.movieCard__row}>
                 <div className={classes.movieCard__poster}>
-                    <img src={getPosterImg(props.movie.poster_path)} alt=""/>
+                    <img src={posterPath} alt=""/>
                 </div>
                 <div className={classes.movieCard__info}>
-                    <h2>{props.movie.original_title}</h2>
-                    <h3>{props.movie.title}</h3>
+                    {/*<h2>{movieData.original_title}</h2>*/}
+                    <h3>{movieData.title}</h3>
                     <table>
+                        <tbody>
                         <tr>
-                            <th className={classes.tableHeader}>Release date:</th>
-                            <td>{props.movie.release_date}</td>
+                            <th className={classes.tableHeader}>{localization.release_date}</th>
+                            <td>{movieData.release_date}</td>
                         </tr>
                         <tr>
-                            <th>Genres:</th>
-                            <td>{props.movie.genres.map((genre: any)=>genre.name).join(", ")}</td>
+                            <th>{localization.genres}</th>
+                            <td>{movieData.genres.map((genre) => genre.name).join(", ")}</td>
                         </tr>
                         <tr>
-                            <th>Tagline:</th>
-                            <td>{props.movie.tagline}</td>
+                            <th>{localization.tagline}</th>
+                            <td>{movieData.tagline}</td>
                         </tr>
                         <tr>
-                            <th>Budget:</th>
-                            <td>{props.movie.budget}</td>
+                            <th>{localization.budget}</th>
+                            <td>${movieData.budget}</td>
                         </tr>
                         <tr>
-                            <th>Revenue:</th>
-                            <td>{props.movie.revenue}</td>
+                            <th>{localization.revenue}</th>
+                            <td>${movieData.revenue}</td>
                         </tr>
                         <tr>
-                            <th>Overview:</th>
-                            <td>{props.movie.overview}</td>
+                            <th>{localization.overview}</th>
+                            <td>{movieData.overview}</td>
                         </tr>
                         <tr>
-                            <th>Vote average:</th>
-                            <td>{props.movie.vote_average} ({props.movie.vote_count})</td>
+                            <th>{localization.vote_average}</th>
+                            <td>{movieData.vote_average} ({movieData.vote_count})</td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

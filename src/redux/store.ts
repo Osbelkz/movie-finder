@@ -1,18 +1,20 @@
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
-import {reducer} from "./reducer";
-import {searchReducer} from "./searchReducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import {moviesReducer} from "./movies-reducer";
+import {searchReducer} from "./search-reducer";
 import thunkMiddleware from "redux-thunk"
+import {appReducer} from "./app-reducer";
 
 
 const reducers = combineReducers({
-    movie: reducer,
-    search: searchReducer
+    movie: moviesReducer,
+    search: searchReducer,
+    app: appReducer,
 })
 
 
-export type StoreType = ReturnType<typeof reducers>
+export type RootStateType = ReturnType<typeof reducers>
 
-let store: Store<StoreType> = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 
 export default store;

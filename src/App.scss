@@ -1,0 +1,31 @@
+.App {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  main {
+    flex: 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .backdrop {
+    }
+  }
+
+
+  footer {
+    height: 40px;
+    padding: 10px;
+    .TMDB-logo {
+      display: block;
+      height: 40px;
+    }
+  }
+
+}
+

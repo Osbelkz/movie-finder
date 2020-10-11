@@ -5,19 +5,22 @@
 }
 
 .searchInput {
+    font-size: large;
     box-sizing: border-box;
     width: inherit;
     height: 30px;
-    outline: none;
+    padding: 0 20px;
     border: none;
-    padding: 0 20px ;
-    border-radius: 999px;
-    font-size: large;
+    border-radius: 10px;
+    outline: none;
 }
 
 .dropResults {
-    background-color: #000000;
     position: absolute;
-    width: inherit;
+    top: 35px;
     z-index: 101;
+    width: inherit;
+    background-color: #000000;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
