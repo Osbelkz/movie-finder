@@ -1,8 +1,8 @@
 import {ThunkAction} from "redux-thunk";
-import {movieAPI} from "../api/api";
-import {MoviesStateType} from "./movies-reducer";
-import {MovieFullDataType} from "../types/types";
-import {RootStateType} from "./store";
+import {movieAPI} from "../../api/api";
+import {MovieIdType, MoviesStateType} from "../movies-reducer";
+import {MovieFullDataType} from "../../types/types";
+import {RootStateType} from "../store";
 
 
 export enum MOVIES_ACTIONS_TYPE {
@@ -28,7 +28,7 @@ export const setMovieDataAC = makeAction<MOVIES_ACTIONS_TYPE.SET_MOVIE, SetMovie
 type SetLoadingModePayloadType = { isLoading: boolean }
 export const setLoadingModeAC = makeAction<MOVIES_ACTIONS_TYPE.SET_LOADING, SetLoadingModePayloadType>(MOVIES_ACTIONS_TYPE.SET_LOADING)
 
-type SetMovieIdPayloadType = { movieId: string | number }
+type SetMovieIdPayloadType = { movieId: MovieIdType }
 export const setMovieIdAC = makeAction<MOVIES_ACTIONS_TYPE.SET_MOVIE_ID, SetMovieIdPayloadType>(MOVIES_ACTIONS_TYPE.SET_MOVIE_ID)
 
 // THUNKS

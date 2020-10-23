@@ -1,65 +1,51 @@
-import React, {ChangeEvent, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import classes from "./Search.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {SearchStateType} from "../../../redux/search-reducer";
-import {RootStateType} from "../../../redux/store";
 import SearchItem from "./SearchItem/SearchItem";
-import {getSearchResultsTC, setSearchWordAC} from '../../../redux/search-actions';
-import {setMovieIdAC} from "../../../redux/movies-actions";
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import {AppLanguageType} from "../../../redux/app-reducer";
+import {SearchMoviesResultType} from "../../../types/types";
+import {MovieIdType} from "../../../redux/movies-reducer";
 
 
-const Search = () => {
+type PropsType = {
+    searchResults: SearchMoviesResultType | null
+    language: AppLanguageType
+    searchWord: string
+    changeCurrentMovieCard: (movieId: MovieIdType) => void
+    changeSearchWord: (searchWord: string) => void
+}
 
+const Search: React.FC<PropsType> = ({language, searchResults, searchWord, changeCurrentMovieCard, changeSearchWord}) => {
 
     const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible(false);
-    const search = useSelector<RootStateType, SearchStateType>(state => state.search)
-    const movieIdData = useSelector<RootStateType>(state => state.movie.movieId)
-    const lang = useSelector<RootStateType, AppLanguageType>(state => state.app.language)
-    const dispatch = useDispatch()
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearchWordAC({searchWord: e.target.value}))
-    }
-
-    const onChangeCurrentMovieCard = (movieId: number) => {
-        if (movieIdData !== movieId) {
-            dispatch(setMovieIdAC({movieId}))
-            setIsComponentVisible(false)
-        }
-    }
 
     const onFocus = () => {
         setIsComponentVisible(true)
     }
-
-    useEffect(() => {
-        if (search.searchWord.length >= 3) {
-            dispatch(getSearchResultsTC(search.searchWord))
-        }
-    }, [search.searchWord, lang])
-
+    const changeCurrentMovieCardHandler = useCallback((movieId: MovieIdType) => {
+        changeCurrentMovieCard(movieId)
+        setIsComponentVisible(false)
+    }, [changeCurrentMovieCard])
 
     return (
         <div className={classes.search} ref={ref}>
             <input type="text"
                    className={classes.searchInput}
                    onFocus={onFocus}
-                   value={search.searchWord}
-                   onChange={onChangeHandler}
+                   value={searchWord}
+                   onChange={(e) => changeSearchWord(e.currentTarget.value)}
             />
             {isComponentVisible &&
             <div className={classes.dropResults}>
-                {search.searchResults?.results
+                {searchResults?.results
                     .sort((a, b) => b.vote_average - a.vote_average)
                     .slice(0, 8)
                     .map(movie =>
                         <SearchItem
-                            changeCurrentMovie={onChangeCurrentMovieCard}
+                            changeCurrentMovie={changeCurrentMovieCardHandler}
                             movieListData={movie}
                             key={movie.id}
-                            appLanguage={lang}
+                            appLanguage={language}
                         />)}
             </div>}
         </div>

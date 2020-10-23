@@ -5,50 +5,40 @@ type SpokenLanguageType = {iso_639_1: string, name: string}
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled'
 
 
-
-export type MovieFullDataType = {
-    adult: boolean,
-    backdrop_path: string | null,
-    belongs_to_collection: null | Object,
-    budget: number,
-    genres: GenreType[],
-    homepage: string | null,
-    id: number,
-    imdb_id: string | null,
-    original_language: string,
-    original_title: string,
-    overview: string | null,
-    popularity: number,
-    poster_path: string | null,
-    production_companies: ProductionCompanyType[],
-    production_countries: ProductionCountryType[],
-    release_date: string, //format: date
-    revenue: number,
-    runtime: number | null,
-    spoken_languages: SpokenLanguageType[],
-    status: MovieStatus,
-    tagline: string | null,
-    title: string,
-    video: boolean,
-    vote_average: number,
-    vote_count: number,
+export interface MovieFullDataType extends MovieCommonDataType {
+    belongs_to_collection: null | Object
+    budget: number
+    genres: GenreType[]
+    homepage: string | null
+    imdb_id: string | null
+    production_companies: ProductionCompanyType[]
+    production_countries: ProductionCountryType[]
+    revenue: number
+    runtime: number | null
+    spoken_languages: SpokenLanguageType[]
+    status: MovieStatus
+    tagline: string | null
 }
 
-export interface MovieListResultType {
-    poster_path: string | null
+export interface MovieListResultType extends MovieCommonDataType{
+    genre_ids: Array<number>
+}
+
+export interface MovieCommonDataType {
     adult: boolean
-    overview: string
-    release_date: string
+    backdrop_path: string | null
     genre_ids: Array<number>
     id: number
-    original_title: string
     original_language: string
-    title: string
-    backdrop_path: string | null
+    original_title: string
+    overview: string
     popularity: number
-    vote_count: number
+    poster_path: string | null
+    release_date: string
+    title: string
     video: boolean
     vote_average: number
+    vote_count: number
 }
 
 export interface SearchMoviesResultType {

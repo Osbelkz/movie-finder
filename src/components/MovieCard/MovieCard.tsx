@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './MovieCard.module.scss'
-import {getPosterImg} from "../../api/api";
+import {getImgPath} from "../../api/api";
 import {MovieFullDataType} from "../../types/types";
 import {Preloader} from "../UI/Preloader/Preloader";
 import {AppLanguageType} from "../../redux/app-reducer";
@@ -12,7 +12,7 @@ type PropsType = {
 }
 
 const MovieCard = React.memo(({movieData, language}: PropsType) => {
-
+    console.log("movie card")
     const enLang = {
         release_date: "Release date:",
         genres: "Genres:",
@@ -39,7 +39,7 @@ const MovieCard = React.memo(({movieData, language}: PropsType) => {
         return <Preloader/>
     }
 
-    let posterPath = movieData.poster_path ? getPosterImg(movieData.poster_path) : noPoster
+    let posterPath = movieData.poster_path ? getImgPath(movieData.poster_path, "w342") : noPoster
 
     return (
         <div className={classes.movieCard}>
@@ -79,8 +79,9 @@ const MovieCard = React.memo(({movieData, language}: PropsType) => {
                         </tbody>
                     </table>
                 </div>
-                <div className={classes.movieCard__averageRate} style={{backgroundColor: `hsl(${movieData.vote_average*10}, 100%, 50%)`}}>
-                    {movieData.vote_average}
+                <div className={classes.movieCard__averageRate}
+                     style={{backgroundColor: `hsl(${movieData.vote_average*10}, 100%, 50%)`}}>
+                    {movieData.vote_average.toFixed(1)}
                 </div>
             </div>
         </div>

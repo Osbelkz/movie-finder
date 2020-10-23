@@ -1,4 +1,4 @@
-import { AppActionsType, APP_ACTIONS_TYPE } from "./app-actions";
+import { AppActionsType, APP_ACTIONS_TYPE } from "./actions/app-actions";
 
 type AppStateType = typeof initialState
 

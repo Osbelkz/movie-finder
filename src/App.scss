@@ -3,27 +3,34 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-
+  width: 100%;
   main {
+    min-height: 100vh;
+    width: inherit;
     flex: 1 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .backdrop {
+    .movieCardContainer {
+      min-height: inherit;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
 
   footer {
-    height: 40px;
+    position: absolute;
     padding: 10px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
     .TMDB-logo {
       display: block;
-      height: 40px;
+      height: 30px;
     }
   }
 

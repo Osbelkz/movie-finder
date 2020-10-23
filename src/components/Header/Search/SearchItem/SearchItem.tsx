@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import classes from "./SearchItem.module.css";
 import {MovieListResultType} from "../../../../types/types";
-import {getMiniPosterImg} from "../../../../api/api";
+import {getImgPath} from "../../../../api/api";
 import {AppLanguageType} from "../../../../redux/app-reducer";
+import {MovieIdType} from "../../../../redux/movies-reducer";
 
 
 type PropsType = {
     movieListData: MovieListResultType
-    changeCurrentMovie: (movieId: number) => void
+    changeCurrentMovie: (movieId: MovieIdType) => void
     appLanguage: AppLanguageType
 }
 
@@ -20,6 +21,7 @@ const SearchItem: React.FC<PropsType> = ({movieListData, changeCurrentMovie, app
     const onClickHandler = () => {
         changeCurrentMovie(id)
     }
+
     return (
         <>
             <div className={classes.searchItem} onClick={onClickHandler} onMouseOver={()=>setQuickView(true)} onMouseLeave={()=>setQuickView(false)}>
@@ -43,7 +45,7 @@ type QuickViewPropsType = {
 const QuickView: React.FC<QuickViewPropsType> = (props) => {
     return (
         <div className={classes.quickView}>
-            <img src={getMiniPosterImg(props.posterPath)} alt=""/>
+            <img src={getImgPath(props.posterPath, "w92")} alt=""/>
         </div>
     );
 };
