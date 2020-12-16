@@ -1,12 +1,13 @@
 import React from 'react';
 import classes from "./Header.module.css";
-import Search from "./Search/Search";
 import {useDispatch} from "react-redux";
-import {changeAppLanguageAC} from "../../redux/app-actions";
+import {changeAppLanguageAC} from "../../redux/actions/app-actions";
 import {AppLanguageType} from "../../redux/app-reducer";
+import SearchContainer from './Search/SearchContainer';
+import { NavLink } from 'react-router-dom';
 
-const Header = () => {
-
+const Header = React.memo(() => {
+    console.log("header render")
     const dispatch = useDispatch()
 
     const changeLanguageHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -14,14 +15,18 @@ const Header = () => {
     }
 
     return (
-        <div className={classes.header}>
-            <Search/>
+        <header className={classes.header}>
+            <nav>
+                <NavLink to={"/calendar"} title={"Calendar"} />
+            </nav>
+            <SearchContainer/>
+
             <div>
                 <button data-lang={"ru-RU"} onClick={changeLanguageHandler}>RU</button>
                 <button data-lang={"en-EN"} onClick={changeLanguageHandler}>EN</button>
             </div>
-        </div>
+        </header>
     );
-};
+})
 
 export default Header;

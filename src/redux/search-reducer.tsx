@@ -1,5 +1,5 @@
 import { SearchMoviesResultType } from "../types/types";
-import {SEARCH_ACTIONS_TYPE, SearchActionsTypes} from "./search-actions";
+import {SEARCH_ACTIONS_TYPE, SearchActionsTypes} from "./actions/search-actions";
 
 export interface SearchStateType {
     searchWord: string

@@ -42,16 +42,18 @@ export const searchAPI = {
     }
 }
 
+export const testAPI = {
+    getCards() {
+        return axios.get("https://api.pokemontcg.io/v1/cards")
+    }
+}
+
 
 
 //additional functions
 
-export const getBackdropImg = (backdrop: string | null): string => {
-    return `${IMAGE_DOMAIN_URL}w780/${backdrop}`
-}
-export const getPosterImg = (poster: string | null): string => {
-    return `${IMAGE_DOMAIN_URL}w342/${poster}`
-}
-export const getMiniPosterImg = (poster: string | null): string => {
-    return `${IMAGE_DOMAIN_URL}w92/${poster}`
+export type imgSizeType = "w780" | "w342" | "w92"
+
+export const getImgPath = (path: string | null, size: imgSizeType): string => {
+    return `${IMAGE_DOMAIN_URL}${size}/${path}`
 }

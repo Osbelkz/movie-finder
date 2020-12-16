@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import classes from "./SearchItem.module.css";
+import classes from "./SearchItem.module.scss";
 import {MovieListResultType} from "../../../../types/types";
-import {getMiniPosterImg} from "../../../../api/api";
+import {getImgPath} from "../../../../api/api";
 import {AppLanguageType} from "../../../../redux/app-reducer";
+import {MovieIdType} from "../../../../redux/movies-reducer";
 
 
 type PropsType = {
     movieListData: MovieListResultType
-    changeCurrentMovie: (movieId: number) => void
+    changeCurrentMovie: (movieId: MovieIdType) => void
     appLanguage: AppLanguageType
 }
 
@@ -20,16 +21,18 @@ const SearchItem: React.FC<PropsType> = ({movieListData, changeCurrentMovie, app
     const onClickHandler = () => {
         changeCurrentMovie(id)
     }
+
     return (
-        <>
-            <div className={classes.searchItem} onClick={onClickHandler} onMouseOver={()=>setQuickView(true)} onMouseLeave={()=>setQuickView(false)}>
-                <div className={classes.description}>
-                    <div>{movieTitle}</div>
-                    <div>{vote_average} ({release_date})</div>
-                </div>
-                {quickView && <QuickView posterPath={movieListData.poster_path}/>}
-            </div>
-        </>
+        <tr className={classes.searchItem} onClick={onClickHandler} onMouseOver={() => setQuickView(true)}
+             onMouseLeave={() => setQuickView(false)}>
+            {/*<div className={classes.description}>*/}
+            {/*    <div>{movieTitle}</div>*/}
+            {/*    <div>{vote_average} ({release_date})</div>*/}
+            {/*</div>*/}
+                <th>{movieTitle}</th>
+                <td>{vote_average}</td>
+            {movieListData.poster_path && quickView && <QuickView posterPath={movieListData.poster_path}/>}
+        </tr>
     );
 };
 
@@ -43,7 +46,7 @@ type QuickViewPropsType = {
 const QuickView: React.FC<QuickViewPropsType> = (props) => {
     return (
         <div className={classes.quickView}>
-            <img src={getMiniPosterImg(props.posterPath)} alt=""/>
+            <img src={getImgPath(props.posterPath, "w92")} alt=""/>
         </div>
     );
 };

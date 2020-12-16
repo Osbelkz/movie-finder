@@ -1,9 +1,11 @@
-import { MoviesActionTypes } from "./movies-actions"
+import { MoviesActionTypes } from "./actions/movies-actions"
 import {MovieFullDataType} from "../types/types";
-import {MOVIES_ACTIONS_TYPE} from "./movies-actions";
+import {MOVIES_ACTIONS_TYPE} from "./actions/movies-actions";
+
+export type MovieIdType = string | number | null
 
 export interface MoviesStateType {
-    movieId: string | number | null
+    movieId: MovieIdType
     movieData: MovieFullDataType | null
     isLoading: boolean
 }

@@ -1,7 +1,7 @@
-import {searchAPI} from "../api/api";
-import {SearchMoviesResultType} from "../types/types";
+import {searchAPI} from "../../api/api";
+import {SearchMoviesResultType} from "../../types/types";
 import {ThunkAction} from "redux-thunk";
-import {RootStateType} from "./store";
+import {RootStateType} from "../store";
 
 export enum SEARCH_ACTIONS_TYPE {
     SET_SEARCH_WORD = "SET_SEARCH_WORD",

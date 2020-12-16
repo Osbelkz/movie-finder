@@ -1,7 +1,13 @@
 .searchItem {
-    padding: 5px;
     color: white;
-    position: relative;
+    th {
+        padding: 5px 10px;
+        text-align: left;
+    }
+    td {
+        padding: 5px 10px;
+        text-align: right;
+    }
 }
 .description {
     display: flex;
@@ -20,5 +26,5 @@
     right: -92px;
     width: 92px;
     height: 138px;
-    background-color:cadetblue;
+    background-color: inherit;
 }
