@@ -1,7 +1,13 @@
 .searchItem {
-    padding: 5px;
     color: white;
-    position: relative;
+    th {
+        padding: 5px 10px;
+        text-align: left;
+    }
+    td {
+        padding: 5px 10px;
+        text-align: right;
+    }
 }
 .description {
     display: flex;

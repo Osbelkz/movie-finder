@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import classes from "./SearchItem.module.css";
+import classes from "./SearchItem.module.scss";
 import {MovieListResultType} from "../../../../types/types";
 import {getImgPath} from "../../../../api/api";
 import {AppLanguageType} from "../../../../redux/app-reducer";
@@ -23,15 +23,16 @@ const SearchItem: React.FC<PropsType> = ({movieListData, changeCurrentMovie, app
     }
 
     return (
-        <>
-            <div className={classes.searchItem} onClick={onClickHandler} onMouseOver={()=>setQuickView(true)} onMouseLeave={()=>setQuickView(false)}>
-                <div className={classes.description}>
-                    <div>{movieTitle}</div>
-                    <div>{vote_average} ({release_date})</div>
-                </div>
-                {quickView && <QuickView posterPath={movieListData.poster_path}/>}
-            </div>
-        </>
+        <tr className={classes.searchItem} onClick={onClickHandler} onMouseOver={() => setQuickView(true)}
+             onMouseLeave={() => setQuickView(false)}>
+            {/*<div className={classes.description}>*/}
+            {/*    <div>{movieTitle}</div>*/}
+            {/*    <div>{vote_average} ({release_date})</div>*/}
+            {/*</div>*/}
+                <th>{movieTitle}</th>
+                <td>{vote_average}</td>
+            {movieListData.poster_path && quickView && <QuickView posterPath={movieListData.poster_path}/>}
+        </tr>
     );
 };
 

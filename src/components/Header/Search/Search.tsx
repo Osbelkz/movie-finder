@@ -37,16 +37,21 @@ const Search: React.FC<PropsType> = ({language, searchResults, searchWord, chang
             />
             {isComponentVisible &&
             <div className={classes.dropResults}>
-                {searchResults?.results
-                    .sort((a, b) => b.vote_average - a.vote_average)
-                    .slice(0, 8)
-                    .map(movie =>
-                        <SearchItem
-                            changeCurrentMovie={changeCurrentMovieCardHandler}
-                            movieListData={movie}
-                            key={movie.id}
-                            appLanguage={language}
-                        />)}
+                <table className={classes.resultsTable}>
+                    <tbody>
+                    {searchResults?.results
+                        .sort((a, b) => b.vote_average - a.vote_average)
+                        .slice(0, 8)
+                        .map(movie =>
+                            <SearchItem
+                                changeCurrentMovie={changeCurrentMovieCardHandler}
+                                movieListData={movie}
+                                key={movie.id}
+                                appLanguage={language}
+                            />)}
+                    </tbody>
+                </table>
+
             </div>}
         </div>
     );

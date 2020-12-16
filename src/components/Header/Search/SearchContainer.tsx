@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import Search from "./Search";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../../redux/store";

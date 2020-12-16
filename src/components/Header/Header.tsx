@@ -15,7 +15,7 @@ const Header = React.memo(() => {
     }
 
     return (
-        <div className={classes.header}>
+        <header className={classes.header}>
             <nav>
                 <NavLink to={"/calendar"} title={"Calendar"} />
             </nav>
@@ -25,7 +25,7 @@ const Header = React.memo(() => {
                 <button data-lang={"ru-RU"} onClick={changeLanguageHandler}>RU</button>
                 <button data-lang={"en-EN"} onClick={changeLanguageHandler}>EN</button>
             </div>
-        </div>
+        </header>
     );
 })
 
