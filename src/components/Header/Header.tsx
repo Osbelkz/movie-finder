@@ -22,8 +22,8 @@ const Header = React.memo(() => {
             <SearchContainer/>
 
             <div>
-                <button data-lang={"ru-RU"} onClick={changeLanguageHandler}>RU</button>
-                <button data-lang={"en-EN"} onClick={changeLanguageHandler}>EN</button>
+                <button className={classes.lang_button} data-lang={"ru-RU"} onClick={changeLanguageHandler}>RU</button>
+                <button className={classes.lang_button} data-lang={"en-EN"} onClick={changeLanguageHandler}>EN</button>
             </div>
         </header>
     );
